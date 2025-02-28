@@ -14,7 +14,7 @@ const Hero = () => {
                 <Button text={'Sign Up'} dark={false} />
                 <Button text={'Login'} dark={true} />
             </div>
-            <Calendar />
+            <Calendar demo />
         </div>
     );
 }
