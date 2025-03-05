@@ -4,9 +4,11 @@ import Calendar from "./Calendar";
 import React, {useEffect, useState} from "react";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "@/firebase";
+import Login from "./Login";
+import Loading from "./Loading";
 
 const Dashboard = () => {
-    const {currentUser, userDataObj, setUserDataObj} = useAuth()
+    const {currentUser, userDataObj, setUserDataObj, loading} = useAuth()
     const [data, setData] = useState({})
 
     function countValues(){
@@ -81,6 +83,14 @@ const Dashboard = () => {
 
         setData(userDataObj)
     }, [currentUser, userDataObj])
+
+    if(loading){
+        return <Loading />
+    }
+
+    if(!currentUser){
+        return <Login />
+    }
 
     return (
         <div className="flex flex-col flex-1 gap-4 sm:gap-8 md:gap-12">

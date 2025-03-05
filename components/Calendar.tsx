@@ -16,6 +16,7 @@ const Calendar = (props) => {
     function handleIncrementMonth(val){
         // value +1 -1
         // If we hit the bounds of the month, we can adjust the displayed year instead
+        
     }
 
     const {demo, data, handleSetMood} = props
