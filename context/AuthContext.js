@@ -1,17 +1,18 @@
 'use client'
-import { auth } from "@/firebase"
+import { auth, db } from "@/firebase"
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth"
+import { doc, getDoc } from "firebase/firestore"
 import React, { useContext, useState, useEffect } from "react"
-
-const AuthContext = React.createContext()
-
+  
+const AuthContext = React.createContext();
+  
 export function useAuth(){
     return useContext(AuthContext)
 }
 
-export function AuthProvider({children}){
+export function AuthProvider({ children }){
     const [currentUser, setCurrentUser] = useState(null)
-    const [userDataObj, setUserDataObj] = useState({})
+    const [userDataObj, setUserDataObj] = useState(null)
     const [loading, setLoading] = useState(true)
 
     // Auth handlers
@@ -24,7 +25,7 @@ export function AuthProvider({children}){
     }
 
     function logout(){
-        setUserDataObj({})
+        setUserDataObj(null)
         setCurrentUser(null)
         return signOut(auth)
     }
@@ -36,10 +37,21 @@ export function AuthProvider({children}){
                 setLoading(true)
                 setCurrentUser(user)
                 if(!user) {
+                    console.log('No user found');
                     return
                 }
 
                 // If user exists, fetch data from firestore database
+                console.log('Fetching user data');
+                const docRef = doc(db, 'users', user.uid)
+                const docSnap = await getDoc(docRef)
+                let firebaseData = {}
+                if(docSnap.exists()){
+                    console.log('Found user data');
+                    firebaseData = docSnap.data()
+                    console.log(firebaseData);
+                }
+                setUserDataObj(firebaseData)
             } catch (err) {
                 console.log(err.message);
             } finally {
@@ -50,7 +62,13 @@ export function AuthProvider({children}){
     }, [])
 
     const value = {
-
+        currentUser,
+        userDataObj,
+        setUserDataObj,
+        signup,
+        logout,
+        login,
+        loading
     }
     return (
         <AuthContext.Provider value={value}>

@@ -1,22 +1,29 @@
+'use client'
 import { gradients, baseRating } from "@/utils"
+import React, {useState} from "react"
 
 const months = { 'January': 'Jan', 'February': 'Feb', 'March': 'Mar', 'April': 'Apr', 'May': 'May', 'June': 'Jun', 'July': 'Jul', 'August': 'Aug', 'September': 'Sept', 'October': 'Oct', 'November': 'Nov', 'December': 'Dec' }
 const monthsArr = Object.keys(months)
 const now = new Date()
 const dayList = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
-export const demoData = {
-    "15": 2, "16": 4, "17": 1, "18": 3, "19": 5,
-    "20": 2, "21": 4, "22": 1, "23": 3, "24": 5,
-}
-
 const Calendar = (props) => {
-    const {demo} = props
-    const year = 2025
-    const month = 'February'
-    const monthNow = new Date(year, Object.keys(months).indexOf(month), 1)
+    const now = new Date()
+    const currMonth = now.getMonth()
+    const [selectedMonth, setSelectedMonth] = useState(Object.keys(months)[currMonth])
+    const [selectedYear, setSelectedYear] = useState(now.getFullYear())
+
+    function handleIncrementMonth(val){
+        // value +1 -1
+        // If we hit the bounds of the month, we can adjust the displayed year instead
+    }
+
+    const {demo, data, handleSetMood} = props
+    // const year = 2025
+    // const month = 'February'
+    const monthNow = new Date(selectedYear, Object.keys(months).indexOf(selectedMonth), 1)
     const firstDayOfMonth = monthNow.getDay()
-    const daysInMonth = new Date(year, Object.keys(month).indexOf(month) + 1, 0).getDate()
+    const daysInMonth = new Date(selectedYear, Object.keys(selectedMonth).indexOf(selectedMonth) + 1, 0).getDate()
 
     const daysToDisplay = firstDayOfMonth + daysInMonth
 
@@ -41,8 +48,8 @@ const Calendar = (props) => {
                             }
 
                             const color = demo ?
-                                gradients.indigo[baseRating[dayIndex]] : dayIndex in demoData ? 
-                                gradients.indigo[demoData[dayIndex]] :
+                                gradients.indigo[baseRating[dayIndex]] : dayIndex in data ? 
+                                gradients.indigo[data[dayIndex]] :
                                 'white'
 
                             return (
