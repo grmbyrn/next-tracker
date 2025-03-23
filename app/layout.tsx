@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import { AuthProvider } from "@/context/AuthContext";
+import Head from "./head";
+import Logout from "@/components/Logout";
 
 const inter = Inter({subsets: ['latin']})
 
@@ -21,9 +23,7 @@ export default function RootLayout({
       <Link href={'/'}>
         <h1 className="text-base sm:text-lg textGradient">Tracker</h1>
       </Link>
-      <div className="flex items-center justify-between">
-        PLACEHOLDER CTA || STATS
-      </div>
+      <Logout />
     </header>
   )
 
@@ -34,6 +34,7 @@ export default function RootLayout({
   )
   return (
     <html lang="en">
+      <Head />
       <AuthProvider>
         <body
           className={'w-full max-w-[1000px] mx-auto text-sm sm:text-base min-h-screen flex flex-col text-slate-800 ' + inter.className}

@@ -10,12 +10,35 @@ import Loading from "./Loading";
 const Dashboard = () => {
     const {currentUser, userDataObj, setUserDataObj, loading} = useAuth()
     const [data, setData] = useState({})
+    const now = new Date()
 
     function countValues(){
+        let total_number_of_days = 0
+        let sum_moods = 0
+        for(let year in data){
+            for(let month in data[year]){
+                for(let day in data[year][month]){
+                    let days_mood = data[year][month][day]
+                    total_number_of_days++
+                    sum_moods += days_mood
+                }
+            }
+        }
+        return {num_days: total_number_of_days, average_mood: sum_moods / total_number_of_days}
     }
+
+    interface Statuses {
+        num_days: number;
+        average_mood: string | number;
+        time_remaining: string;
+    }
+
+    const statuses: Statuses = {
+        ...countValues(),
+        time_remaining: `${23 - now.getHours()}H ${60 - now.getMinutes()}M`
+    };
     
     async function handleSetMood (mood){
-        const now = new Date()
         const day = now.getDate()
         const month = now.getMonth()
         const year = now.getFullYear()
@@ -48,12 +71,6 @@ const Dashboard = () => {
         }
     }
 
-    interface Statuses {
-        num_days: number;
-        time_remaining: string;
-        date: string;
-    }
-
     interface Moods {
         '&*@#$': string
         'Sad': string
@@ -61,12 +78,6 @@ const Dashboard = () => {
         'Good': string
         'Elated': string
     }
-    
-    const statuses: Statuses = {
-        num_days: 14,
-        time_remaining: '13:14:26',
-        date: new Date().toDateString(),
-    };
 
     const moods = {
         '&*@#$': '😭',
@@ -99,8 +110,8 @@ const Dashboard = () => {
                     const typedStatus = status as keyof Statuses;
                     return (
                         <div key={statusIndex} className="p-4 flex flex-col gap-1 sm:gap-2">
-                            <p className="font-medium uppercase text-xs sm:text-sm truncate">{typedStatus.replaceAll('_', ' ')}</p>
-                            <p className="text-base sm:text-lg">{statuses[typedStatus]}</p>
+                            <p className="font-medium capitalize text-xs sm:text-sm truncate">{typedStatus.replaceAll('_', ' ')}</p>
+                            <p className="text-base sm:text-lg">{statuses[typedStatus]} {typedStatus === 'num_days' ? '🔥' : ''}</p>
                         </div>
                     )
                 })}
@@ -122,7 +133,7 @@ const Dashboard = () => {
                     )
                 })}
             </div>
-            <Calendar data={data} handleSetMood={handleSetMood} />
+            <Calendar completeData={data} handleSetMood={handleSetMood} />
         </div>
     );
 }
