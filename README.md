@@ -1,48 +1,114 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mood Tracker
 
-## Getting Started
+A full-stack mood tracking web application built with **Next.js 15**, **Firebase**, **Tailwind CSS**, and **TypeScript**. This app enables users to log their daily moods and visualize emotional trends over time through an interactive calendar interface.
 
-First, run the development server:
+## 🌟 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Daily Mood Logging**: Users can select from five emoji-based mood indicators, ranging from very bad to very good, to represent their daily emotional state.
+- **Interactive Calendar View**: A monthly calendar displays the user's mood entries, providing a visual overview of emotional patterns and fluctuations.
+- **User Authentication**: Secure sign-in and sign-out functionalities powered by Firebase Authentication, ensuring personalized and protected user experiences.
+- **Responsive Design**: Optimized for various devices, offering a seamless user experience on desktops, tablets, and mobile phones.
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 15 (App Router)
+- **Frontend**: React 19, Tailwind CSS 4
+- **Backend & Authentication**: Firebase
+- **Language**: TypeScript
+- **Linting & Formatting**: ESLint 9, Prettier
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- npm or yarn
+
+### Installation
+
+1. **Clone the repository**:
+
+   ```bash
+   git clone https://github.com/yourusername/mood-tracker.git
+   cd mood-tracker
+   ```
+
+2. **Install dependencies:**:
+
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. **Configure Environment Variables**:
+
+Create a `.env.local` file in the root directory and add your Firebase configuration:
+
+```env
+    NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
+    NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_auth_domain
+    NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
+    NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+    NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
+    NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. **Run the development server:**:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open http://localhost:3000 in your browser to view the application.
 
-## Learn More
+## 📦 Deployment
 
-To learn more about Next.js, take a look at the following resources:
+The application is deployed on [Vercel](https://vercel.com/).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+For production deployment:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Build the application:
 
-## Deploy on Vercel
+```bash
+    npm run build
+    # or
+    yarn build
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Start the production server:**:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+    npm start
+    # or
+    yarn start
+```
 
-DEMO DATA
+## 📁 Project Structure
 
-{
-    [year]: {
-        [month]: {
-            1: 4,
-            2: 5,
-            3: 1
-        }
-    }
-}
+```bash
+    ├── public/             # Static assets
+    ├── src/
+    │   ├── components/     # Reusable UI components
+    │   ├── pages/          # Next.js pages
+    │   ├── styles/         # Global styles
+    │   └── utils/          # Utility functions
+    ├── .env.local          # Environment variables
+    ├── tailwind.config.js  # Tailwind CSS configuration
+    ├── next.config.js      # Next.js configuration
+    ├── package.json        # Project metadata and scripts
+    └── README.md           # Project documentation
+```
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+## 🙌 Acknowledgments
+
+- [Next.js](https://nextjs.org/)
+- [Firebase](https://firebase.google.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [TypeScript](https://www.typescriptlang.org/)
