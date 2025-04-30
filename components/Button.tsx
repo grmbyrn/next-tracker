@@ -2,7 +2,7 @@ interface ButtonProps {
     text: string;
     dark?: boolean;
     full?: boolean;
-    clickHandler: (event: React.MouseEvent<HTMLButtonElement>) => void;}
+    clickHandler?: (event: React.MouseEvent<HTMLButtonElement>) => void;}
 
 const Button: React.FC<ButtonProps> = ({ text, dark , full, clickHandler}) => {
     return (

@@ -29,7 +29,7 @@ const Calendar = (props) => {
         }
     }
 
-    const {demo, completeData, handleSetMood} = props
+    const {demo, completeData} = props
     const numericMonth = monthsArr.indexOf(selectedMonth)
     const data = completeData?.[selectedYear]?.[numericMonth] || {}
     // const year = 2025
